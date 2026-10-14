@@ -1,0 +1,34 @@
+# Paste into api.slack.com/apps -> your app -> App Manifest. Add a slash_commands entry per game you want a shortcut for.
+display_information:
+  name: Daily Games
+features:
+  bot_user:
+    display_name: Daily Games
+    always_online: true
+  slash_commands:
+    - command: /daily
+      description: Post daily game links
+      usage_hint: "[game]"
+    - command: /daily-wordle
+      description: Wordle
+    - command: /daily-connections
+      description: Connections
+    - command: /daily-strands
+      description: Strands
+    - command: /daily-mini
+      description: NYT Mini
+    - command: /daily-catfishing
+      description: Catfishing
+    - command: /daily-framed
+      description: Framed
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read
+      - chat:write
+      - commands
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+  socket_mode_enabled: true
