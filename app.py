@@ -4,23 +4,21 @@ import re
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
-# Edit me. Keys are what you type: `/daily-<key>`, `/daily <key>`, `@Daily Games <key>`.
+# Edit me. Lowercased keys are what you type: `/daily-<key>`, `/daily <key>`, `@Daily Games <key>`.
 GAMES = {
-    "wordle": "https://www.nytimes.com/games/wordle/index.html",
-    "connections": "https://www.nytimes.com/games/connections",
-    "strands": "https://www.nytimes.com/games/strands",
-    "mini": "https://www.nytimes.com/crosswords/game/mini",
-    "catfishing": "https://catfishing.net",
-    "framed": "https://framed.wtf",
+    "Krillion": "https://krillion.io/",
+    "MapTap": "https://maptap.gg/",
+    "CatFishing": "https://catfishing.net/",
 }
 
 
 def blocks(name):
     name = name.strip().lower()
-    if name and name not in GAMES:
-        return [{"type": "section", "text": {"type": "mrkdwn", "text": f"Don't know `{name}`. Try: {', '.join(GAMES)}"}}]
-    picks = {name: GAMES[name]} if name else GAMES
-    return [{"type": "section", "text": {"type": "mrkdwn", "text": f"*<{url}|{n.title()}>*"}} for n, url in picks.items()]
+    picks = [(n, url) for n, url in GAMES.items() if name in ("", n.lower())]
+    if not picks:
+        names = ", ".join(n.lower() for n in GAMES)
+        return [{"type": "section", "text": {"type": "mrkdwn", "text": f"Don't know `{name}`. Try: {names}"}}]
+    return [{"type": "section", "text": {"type": "mrkdwn", "text": f"*<{url}|{n}>*"}} for n, url in picks]
 
 
 if __name__ == "__main__":

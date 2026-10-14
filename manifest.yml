@@ -9,18 +9,12 @@ features:
     - command: /daily
       description: Post daily game links
       usage_hint: "[game]"
-    - command: /daily-wordle
-      description: Wordle
-    - command: /daily-connections
-      description: Connections
-    - command: /daily-strands
-      description: Strands
-    - command: /daily-mini
-      description: NYT Mini
+    - command: /daily-krillion
+      description: Krillion
+    - command: /daily-maptap
+      description: MapTap
     - command: /daily-catfishing
-      description: Catfishing
-    - command: /daily-framed
-      description: Framed
+      description: CatFishing
 oauth_config:
   scopes:
     bot:
