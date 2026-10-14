@@ -14,3 +14,14 @@ daily games slack app
 
 ## Adding a game
 Add it to `GAMES` in `app.py`. For a `/daily-<name>` shortcut, also add it to `manifest.yml` and re-paste.
+
+## Running on the Pi (Portainer)
+Socket Mode only makes outbound connections, so the Pi doesn't need to be reachable from the internet.
+
+1. Portainer -> **Stacks** -> **Add stack** -> **Repository**.
+   - URL: this repo. Private repo -> enable **Authentication** with a GitHub fine-grained PAT (read-only Contents on this repo).
+   - Compose path: `docker-compose.yml`.
+2. **Environment variables**: add `SLACK_BOT_TOKEN` and `SLACK_APP_TOKEN`.
+3. Deploy. Logs are in the container's **Logs** view. Optionally enable **GitOps updates** so pushes to `main` redeploy.
+
+Run only one copy long-term (stop the local one: `docker compose down`).

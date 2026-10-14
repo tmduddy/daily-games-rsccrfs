@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 
@@ -22,6 +23,7 @@ def blocks(name):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     app = App(token=os.environ["SLACK_BOT_TOKEN"])
 
     # Matches /daily (game in the text) and /daily-catfishing (game in the command name).
