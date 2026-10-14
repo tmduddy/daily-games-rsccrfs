@@ -18,7 +18,7 @@ def blocks(name):
     if not picks:
         names = ", ".join(n.lower() for n in GAMES)
         return [{"type": "section", "text": {"type": "mrkdwn", "text": f"Don't know `{name}`. Try: {names}"}}]
-    return [{"type": "section", "text": {"type": "mrkdwn", "text": f"*<{url}|{n}>*"}} for n, url in picks]
+    return [{"type": "section", "text": {"type": "mrkdwn", "text": f"Daily 🧵 for *<{url}|{n}>* [SPOILERS HOT]"}} for n, url in picks]
 
 
 if __name__ == "__main__":
@@ -29,10 +29,10 @@ if __name__ == "__main__":
     def slash(ack, respond, command):
         ack()
         name = command["command"].removeprefix("/daily").lstrip("-") or command.get("text", "")
-        respond(response_type="in_channel", blocks=blocks(name), text="Daily games")
+        respond(response_type="in_channel", blocks=blocks(name), text="Daily games", unfurl_links=False, unfurl_media=False)
 
     @app.event("app_mention")
     def mention(event, say):
-        say(blocks=blocks(re.sub(r"<@\w+>", "", event["text"])), text="Daily games")
+        say(blocks=blocks(re.sub(r"<@\w+>", "", event["text"])), text="Daily games", unfurl_links=False, unfurl_media=False)
 
     SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
