@@ -3,7 +3,7 @@ import os
 import re
 
 from slack_bolt import App
-from slack_bolt.adapter.socket_mode import SocketModeHandler
+from slack_bolt.adapter.socket_mode.websocket_client import SocketModeHandler
 
 # Edit me. Lowercased keys are what you type: `/daily-<key>`, `/daily <key>`, `@Daily Games <key>`.
 GAMES = {
